@@ -467,3 +467,9 @@ fi
 核心设计原则是 **Agent 核心保持简单，扩展能力外置**。Hook 是切面（AOP），在已有动作上加逻辑，但不改变 Agent 本身的能力边界。
 
 但如果你想给 Agent **全新的能力**呢？比如查数据库、搜 Jira、调公司内部 API——这些不是 Hook 能搞定的，你需要给 Agent 加新工具。下一章我们来讲 MCP（Model Context Protocol），一个标准协议，让任何人都能给 Agent 写新工具。
+
+---
+
+> 本章来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

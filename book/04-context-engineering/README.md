@@ -583,3 +583,9 @@ npx tsx ../ling-agent/code/ch04/src/ling.ts
 ```
 
 现在你的 Agent 认识你的项目了。
+
+---
+
+> 本章来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

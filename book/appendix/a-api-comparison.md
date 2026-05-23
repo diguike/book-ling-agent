@@ -249,3 +249,9 @@ data: {"type":"message_stop"}
 3. **企业环境**：Azure OpenAI 有国内区域（`chinaeast2`），走正规渠道申请。火山引擎有企业套餐。
 
 这也是我们在第 2 章把 Provider 做成可插拔架构的原因——网络环境变了，换个 Provider 就行，上层代码一行不改。
+
+---
+
+> 本附录来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

@@ -785,3 +785,8 @@ Claude Code 有 `SubagentStart` 和 `SubagentStop` 两个 Hook 事件——子 A
 
 下一章把 Ling 从玩具变成能跑在生产环境的工具——非交互模式、结构化输出、CI/CD 集成、npm 发布。
 
+---
+
+> 本章来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

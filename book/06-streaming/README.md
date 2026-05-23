@@ -706,3 +706,9 @@ interface SDKResultMessage {
 从代码结构看，变化很小：`stream()` 方法和 `chat()` 方法并存，Agent Loop 的核心逻辑（while 循环、工具执行、历史管理）几乎没改。好的抽象就是这样——底层实现大改，上层接口小动。
 
 下一章加上会话记忆——让 Ling 记住之前聊了什么，跨会话保持上下文。
+
+---
+
+> 本章来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

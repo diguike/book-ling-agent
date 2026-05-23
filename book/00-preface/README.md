@@ -337,3 +337,9 @@ graph LR
 ---
 
 行，废话到此为止。翻到第 1 章，打开编辑器，新建一个 `ling.ts`——50 行代码，你的第一个 Agent。
+
+---
+
+> 本章来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

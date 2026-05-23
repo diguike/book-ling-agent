@@ -704,3 +704,9 @@ Claude Code 在 macOS 上就用了 `sandbox-exec` 来限制文件系统和网络
 权限系统不是功能——它是基础设施。写得好，Agent 越强大越安全。写得差或者没写，你迟早会在凌晨三点被一条 `rm -rf` 从床上叫起来。
 
 下一章给 Ling 加上流式输出——回复从"想好了一口气说完"变成"边想边说"。
+
+---
+
+> 本章来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

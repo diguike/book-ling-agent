@@ -210,3 +210,9 @@ Ling 的 8 个工具覆盖了最核心的能力（文件读写 + 搜索 + 命令
 10. `lsp/` — LSP 集成的实现方式
 
 每轮大约需要 2-3 小时。第一轮最重要——走完消息流，整个架构就清楚了。
+
+---
+
+> 本附录来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

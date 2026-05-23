@@ -669,3 +669,9 @@ type ModelOption = "sonnet" | "opus" | "haiku"
 代码量增加了不少，但 Agent Loop 本身反而变简单了。以后不管换什么模型，`provider.chat()` 一行搞定。
 
 下一章给 Ling 装上完整的工具系统——8 个工具，覆盖文件操作、代码搜索、命令执行。
+
+---
+
+> 本章来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

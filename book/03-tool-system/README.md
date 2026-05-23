@@ -644,3 +644,9 @@ Agent 经常搜出几千行结果或者读一个大文件。Claude Code 有个 t
 我们的 Ling 目前用的是简单截断（grep 工具截到 100 行），生产环境中可以做得更精细。
 
 现在 Ling 有手了。8 个工具覆盖了文件读写、代码搜索、命令执行、用户交互。但工具好不好使，很大程度取决于 Agent 拿到了多少有用的上下文。下一章做上下文工程——让 Ling 自动感知项目结构，在有限的 token 窗口里塞进最关键的信息。
+
+---
+
+> 本章来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

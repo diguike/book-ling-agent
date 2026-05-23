@@ -172,3 +172,9 @@ ch01  单文件 Agent（50 行）
 | `src/cli/parser.ts` | 命令行参数解析：`--provider`、`--model`、`--print`、`--resume`、`-p` 等 |
 | `src/cli/output.ts` | 输出格式化：普通模式（交互式）和 print 模式（纯文本输出，适合管道） |
 | `src/cli/schema-validator.ts` | 工具参数 JSON Schema 校验器 |
+
+---
+
+> 本附录来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)

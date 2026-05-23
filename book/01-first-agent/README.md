@@ -379,3 +379,9 @@ agent(process.argv[2] || "Read package.json and summarize this project.");
 市面上所有的 Agent 框架——LangChain、CrewAI、AutoGen——不管包装了多少概念，核心都是这三样。区别在于：工具多不多、Loop 复不复杂、上下文管理得好不好。
 
 下一章给 Ling 加上多模型支持——一套代码跑通火山引擎、Claude、OpenAI 三家 LLM。
+
+---
+
+> 本章来自《自己动手写 AI Agent》开源版 · 作者「递归客」  
+> 在线阅读完整书系：[inferloop.dev](https://inferloop.dev)  
+> 源码仓库：[github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)
