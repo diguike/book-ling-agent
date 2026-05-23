@@ -1,3 +1,7 @@
+> **配套资源**  
+> 源码仓库 · [github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)  
+> 在线阅读 · [inferloop.dev/ling-agent](https://inferloop.dev/ling-agent)
+
 # 前言 · 先看最终效果
 
 你打算写一个 AI 编程助手。

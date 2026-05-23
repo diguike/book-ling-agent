@@ -1,5 +1,8 @@
 # 《自己动手写 AI Agent》
 
+> 在线阅读 · [inferloop.dev/ling-agent](https://inferloop.dev/ling-agent)  
+> 所有书目 · [inferloop.dev](https://inferloop.dev)
+
 **从 Claude Code 开源架构到你的第一个编程助手**
 
 > 配套代码仓库 · 全书 11 章 + 终章 + 4 附录
@@ -131,3 +134,18 @@ graph LR
 ## License
 
 MIT
+
+
+## 相关书
+
+来自同一作者的其他书:
+
+- [《Hermes Agent 源码解读》](https://inferloop.dev/hermes-agent)
+- [《LLM Infra 工程实战》](https://inferloop.dev/llm-infra)
+- [《AI Token 中转站实战》](https://inferloop.dev/llm-gateway)
+- [《Agent Memory 工程实战》](https://inferloop.dev/claude-mem)
+- [《百万级 AI Agent 平台架构》](https://inferloop.dev/enterprise-agent)
+- [《OpenClaw 源码解析》](https://inferloop.dev/openclaw)
+- [《Transformer 教学》](https://inferloop.dev/transformer)
+- [《Claude Code Skill 开发指南》](https://inferloop.dev/claude-skill)
+- [《Claude 插件官方指南》](https://inferloop.dev/claude-plugins)
