@@ -21,8 +21,8 @@
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/anthropics/ling-agent.git
-cd ling-agent
+git clone https://github.com/diguike/book-ling-agent.git
+cd book-ling-agent
 
 # 2. 配置环境变量（火山引擎免费额度够跑完全书）
 export ARK_API_KEY="your-api-key"
