@@ -1,0 +1,31 @@
+{
+  "name": "ling-agent",
+  "version": "0.10.0",
+  "description": "Ling - AI Coding Agent",
+  "type": "module",
+  "bin": {
+    "ling": "./bin/ling"
+  },
+  "files": [
+    "bin/",
+    "dist/"
+  ],
+  "scripts": {
+    "start": "tsx src/ling.ts",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": ["ai", "agent", "cli", "coding-assistant"],
+  "license": "MIT",
+  "dependencies": {
+    "openai": "^4.78.0",
+    "@anthropic-ai/sdk": "^0.39.0",
+    "glob": "^11.0.1",
+    "minimatch": "^10.0.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}

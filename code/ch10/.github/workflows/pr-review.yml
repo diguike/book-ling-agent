@@ -1,0 +1,45 @@
+name: PR Review with Ling
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 需要完整历史来生成 diff
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Ling
+        run: npm install -g ling-agent
+
+      - name: Get PR diff
+        run: |
+          git diff origin/${{ github.base_ref }}...HEAD > /tmp/pr-diff.txt
+
+      - name: Run Ling Review
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          cat /tmp/pr-diff.txt | ling -p "Review this PR diff. Focus on bugs, security issues, and code style problems. Be concise." \
+            --format json \
+            --schema review-schema.json \
+            --max-turns 1 \
+            > /tmp/review.json
+
+      - name: Post Review Comment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY=$(cat /tmp/review.json | jq -r '.content')
+          gh pr comment ${{ github.event.pull_request.number }} --body "$BODY"

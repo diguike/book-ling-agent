@@ -1,0 +1,17 @@
+{
+  "name": "ling-agent-ch02",
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "start": "npx tsx src/ling.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "openai": "^4.80.0",
+    "@anthropic-ai/sdk": "^0.39.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "ling-ch07",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/ling.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "openai": "^4.78.0",
+    "glob": "^11.0.1",
+    "minimatch": "^10.0.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}

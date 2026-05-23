@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+// 可执行入口——shebang 让系统知道用 node 来跑
+// npm link / npm install -g 后，直接在终端输入 ling 就能用
+
+import("../dist/ling.js");

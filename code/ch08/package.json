@@ -1,0 +1,20 @@
+{
+  "name": "ling-ch08",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/ling.ts",
+    "sqlite-server": "tsx src/mcp-servers/sqlite-server.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "openai": "^4.78.0",
+    "better-sqlite3": "^11.7.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0",
+    "@types/better-sqlite3": "^7.6.12"
+  }
+}
