@@ -1,20 +1,44 @@
+---
+title: 前言
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/UDzKwPffXiI2IjkQZnwcGnNOnmh"
+last_synced: "2026-05-26T17:23:01Z"
+---
+
 > **配套资源**  
 > 源码仓库 · [github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)  
 > 在线阅读 · [inferloop.dev/ling-agent](https://inferloop.dev/ling-agent)
 
-# 前言 · 先看最终效果
+# 前言
 
-你打算写一个 AI 编程助手。
+## 我为什么要写这本书
 
-不是那种调一下 ChatGPT API、把回复打印出来就完事的玩具。你想做的是一个**真正能干活**的 Agent——丢给它一个项目，它能自己看代码、找 Bug、改文件、跑测试，干完还能告诉你它改了什么。
+去年我开始重度用 Claude Code。一开始的感受是：这玩意儿是真能干活。让它修个 Bug，它会自己 grep 代码、读文件、改源码、跑测试、跑完告诉你它改了什么。不是 demo，是每天写业务代码时确实会被它替下手的程度。
 
-这本书就是带你从零写出这样一个东西。它叫 Ling（灵）。
+但用得越久，越想知道它**内部到底怎么工作的**。
 
-动手之前，先看看 Ling 的完成品长什么样。下面 8 个场景，都是你读完全书后能自己实现的能力。
+- 它怎么决定下一步是搜索、还是直接动手改？
+- 几十个工具的 schema 全塞进 system prompt 里吗？token 不爆？
+- 上下文写满了它怎么压缩？为什么压缩之后还像没"失忆"？
+- `rm -rf` 这种命令它是怎么拦下来的？万一拦不住怎么办？
+- 同一个任务它有时候开"子 Agent"并行，依据是什么？
 
----
+这些问题，光看 Anthropic 的官方博客和文档答不上来。后来 Anthropic 把 Claude Code 的核心代码开源，社区也涌出一批仿写项目（OpenCode、Hermes、OpenClaw 等）。我挨个翻完它们的源码，写了《Hermes Agent 源码解读》和《OpenClaw 源码解析》两本书。
 
-## 场景 1：项目理解——启动即分析
+但写完这两本之后，我又卡住了一次。
+
+**读源码理解一种架构是一回事，自己从零造出来又是另一回事。**
+
+读源码时你看见的是"它已经长成这样"。你看不见作者中间废掉的几个版本，看不见某个抽象为什么是现在这个形状，分不清哪一步是设计、哪一步是历史包袱。只有自己从空文件开始，一行行敲到能跑，把每一个决定都过一遍脑子，"为什么"才会真正落到脑子里。
+
+所以这本书的写法跟前两本反过来：**不分析任何现成 Agent 的源码，从零写一个**。代码量控制在 2000 行 TypeScript，但要做到工业级——多模型支持、三层权限拦截、流式输出、会话持久化、Hook、MCP 协议、子 Agent 并行、CI 模式。每一章我会讲清楚"为什么这样设计"，并且在结尾对照 Claude Code 是怎么做同一件事的。
+
+成品叫 **Ling（灵）**，[开源在 GitHub](https://github.com/diguike/book-ling-agent)。这本书就是带你把它一行一行写出来的过程。
+
+## 读完这本书你能造出什么
+
+下面 8 个场景，都是你读完全书之后能自己实现的能力。先看效果，再决定要不要继续翻。
+
+### 场景 1：项目理解——启动即分析
 
 Ling 启动时会自动扫描当前项目，读 `package.json`、看 `git status`、数目录结构，然后把这些信息塞进 system prompt。你不用告诉它"这是一个什么项目"，它已经知道了。
 
@@ -43,9 +67,9 @@ $ cd ~/my-express-app && ling
 
 这不是魔法。第 4 章会讲上下文工程——怎么从项目里提取关键信息，怎么在有限的 token 预算内塞进最有用的上下文。
 
-## 场景 2：多模型切换——doubao / claude / openai
+### 场景 2：多模型切换——doubao / claude / openai
 
-国内用豆包（火山引擎），速度快、便宜。需要强推理能力切 Claude。想用 GPT-4o 也行。一个配置文件搞定，运行时也能切。
+国内用豆包（[火山引擎](https://www.volcengine.com/product/doubao)），速度快、便宜。需要强推理能力切 [Claude](https://www.anthropic.com/claude)。想用 [GPT-4o](https://openai.com/index/hello-gpt-4o/) 也行。一个配置文件搞定，运行时也能切。
 
 ```
 $ ling --provider doubao
@@ -60,9 +84,9 @@ $ ling --provider doubao
   Switched to: gpt-4o (OpenAI)
 ```
 
-三家 API 的请求格式、tool calling 协议、流式返回结构全都不一样。第 2 章会手写三个 Provider 适配器，统一成一个接口。你会发现 Anthropic 的 `tool_use` 和 OpenAI 的 `function calling` 在细节上差异不小——比如参数类型处理、多工具并发返回的方式。
+三家 API 的请求格式、tool calling 协议、流式返回结构全都不一样。第 2 章会手写三个 Provider 适配器，统一成一个接口。[Anthropic](https://www.anthropic.com) 的 `tool_use` 和 [OpenAI](https://openai.com) 的 `function calling` 在细节上差异不小——比如参数类型处理、多工具并发返回的方式，都得逐个磨平。
 
-## 场景 3：自主修 Bug——搜索 + 编辑 + 确认
+### 场景 3：自主修 Bug——搜索 + 编辑 + 确认
 
 这是 Agent 最核心的能力循环：**理解问题 → 定位代码 → 修改文件 → 验证结果**。
 
@@ -96,11 +120,11 @@ $ ling
   期望 number 但拿到了 string，内部抛了异常。
 ```
 
-看到了吗？Ling 用了 4 个工具：`grep` 搜索、`read_file` 读文件、`edit_file` 改代码、`bash` 跑测试。这些工具的实现在第 3 章，Agent Loop 的循环逻辑在第 1 章。它们组合在一起，就是一个能自主解决问题的 Agent。
+这次对话里 Ling 一共用了 4 个工具：`grep` 搜索、`read_file` 读文件、`edit_file` 改代码、`bash` 跑测试。工具的实现在第 3 章，调度它们的 Agent Loop 在第 1 章。组合起来，就是一个能自主解决问题的 Agent。
 
-## 场景 4：权限拦截——危险操作先问人
+### 场景 4：权限拦截——危险操作先问人
 
-Agent 能跑 shell 命令，这事说起来就让人后背发凉。万一它执行 `rm -rf /`？万一它 `git push --force` 到 main？
+Agent 能跑 shell 命令，这是个真实的安全问题。万一它执行 `rm -rf /`？万一它 `git push --force` 到 main？
 
 Ling 有一套三层权限模型：`allow`（直接放行）、`ask`（先问用户）、`deny`（直接拒绝）。
 
@@ -122,9 +146,9 @@ Ling 有一套三层权限模型：`allow`（直接放行）、`ask`（先问用
 
 `rm -rf` 被直接拦截，连问都不问。`find -delete` 虽然也是删除操作，但目标更精确，所以走的是 `ask` 流程——让你确认一下再执行。
 
-这套机制在第 5 章实现。你会学到 glob 模式匹配、权限中间件、文件系统边界限制，还有 prompt injection 的基本防御。
+这套机制在第 5 章实现，包括 glob 模式匹配、权限中间件、文件系统边界限制，以及 prompt injection 的基本防御。
 
-## 场景 5：子 Agent 并行——拆任务并行执行
+### 场景 5：子 Agent 并行——拆任务并行执行
 
 一个大任务，比如"把这个 Express 项目迁移到 Hono"，一个 Agent 独自干会很慢。Ling 可以拆成多个子 Agent 并行干。
 
@@ -158,9 +182,9 @@ Ling 有一套三层权限模型：`allow`（直接放行）、`ask`（先问用
 
 每个子 Agent 有独立的上下文窗口，只看自己负责的文件，互不干扰。第 10 章会实现 `AgentSpawner`、并行调度器和结果聚合。
 
-## 场景 6：MCP 接入数据库——外部数据源查询
+### 场景 6：MCP 接入数据库——外部数据源查询
 
-MCP（Model Context Protocol）是 Agent 工具的"USB 接口"。你不用把所有功能都写死在代码里，通过 MCP 可以接入任何外部工具。
+[MCP（Model Context Protocol）](https://modelcontextprotocol.io) 是 Agent 工具的"USB 接口"。你不用把所有功能都写死在代码里，通过 MCP 可以接入任何外部工具。
 
 ```
 $ cat .ling/mcp.json
@@ -199,7 +223,7 @@ $ ling
 
 Ling 自己不懂 SQL，也不知道你的数据库长什么样。它只是通过 MCP 协议连接了一个 SQLite Server，剩下的事——发现有哪些工具可用、传参数、拿结果——全是协议规定好的。第 9 章会从零实现 MCP Client，还会手写一个 MCP Server。
 
-## 场景 7：CI 管道模式——非交互 + 结构化输出
+### 场景 7：CI 管道模式——非交互 + 结构化输出
 
 Agent 不只是给人用的，也可以嵌进 CI/CD 管道里，给机器用。
 
@@ -235,7 +259,7 @@ Agent 不只是给人用的，也可以嵌进 CI/CD 管道里，给机器用。
 
 `-p` 参数让 Ling 进入 print 模式：读 stdin、调 LLM、输出结果、退出。`--format json` 加 `--schema` 可以约束输出格式，方便下游程序解析。这些在第 11 章实现。
 
-## 场景 8：会话恢复——退出后接着聊
+### 场景 8：会话恢复——退出后接着聊
 
 你花了 20 分钟让 Ling 分析一个复杂的代码问题，分析到一半要去开会。回来之后：
 
@@ -263,52 +287,27 @@ $ ling --continue
 
 ---
 
-## 技术规格
+## 你最终会带走什么
 
-看完场景，来看硬数据。这是 Ling 完成品的技术规格：
+代码本身不是目的。读完这本书，你应该能带走这几样东西：
 
-| 项目 | 数值 |
-|------|------|
-| 核心代码量 | ~2000 行 TypeScript |
-| 内置工具 | 8 个（read_file / write_file / edit_file / grep / glob / bash / list_files / ask_user） |
-| LLM Provider | 3 个（火山引擎（豆包）/ Claude / OpenAI） |
-| 运行时 | Node.js 20+ |
-| 外部依赖 | < 10 个 npm 包 |
-| 协议支持 | MCP (Model Context Protocol) stdio 传输 |
-| 输出模式 | 交互式 / Print / Stream JSON |
-| 权限模型 | 三层（allow / ask / deny），Glob 模式匹配 |
-| 会话持久化 | 本地 JSON 文件 |
-| 子 Agent | 支持并行，独立上下文 + Worktree 隔离 |
+1. **一个能跑、能用、能改的开源 Agent 项目**——基于你自己写的代码，长出你想要的能力。
+2. **Agent 工程的核心心智模型**——下次看任何一份 Agent 源码（Claude Code、Cursor、Aider、Cline……），都能在五分钟内对上号：Loop 在哪、工具怎么调度、权限怎么拦、上下文怎么管。
+3. **一组可迁移的工程判断**——什么时候该开子 Agent、什么时候该压缩上下文、为什么权限要做成 `ask` 而不是直接 `allow`。这些只有自己写过才会内化，光读文档拿不到。
 
-2000 行代码听起来不多。但它涵盖了一个工业级 Agent 的核心架构。每一行你都会亲手写，而且知道为什么这样写。
+## 你需要准备什么
 
----
-
-## 本书适合谁
-
-**目标读者**：有 1-3 年经验的程序员，用过 ChatGPT 或 Claude，好奇"这东西到底是怎么做出来的"，想自己动手造一个。
-
-你不需要懂机器学习，不需要会训练模型。这本书从第一行代码到最后一行代码都在应用层——调 API，不碰权重。
-
-**你需要准备**：
-
-- **TypeScript 基础**——能看懂 `async/await`、`interface`、`泛型` 就够。不需要精通，遇到的新语法我会解释。
+- **TypeScript 基础**——能看懂 `async/await`、`interface`、泛型就够。不需要精通，遇到新语法我会解释。
 - **Node.js 环境**——Node.js 20 以上，npm 或 pnpm 都行。
-- **一个 LLM API Key**——火山引擎（豆包）、Claude、OpenAI 任选一个。书里默认用豆包做演示，因为国内访问稳定，注册就送额度。三个都有最好，第 2 章会全部用到。
-- **操作系统**——macOS 或 Linux。Windows 用户请使用 WSL 2（Windows Subsystem for Linux），因为书中的 grep、bash 等工具直接调用系统命令，原生 Windows 不兼容。
+- **一个 LLM API Key**——火山引擎（豆包）、Claude、OpenAI 任选一个。书里默认用豆包做演示，国内访问稳定，注册就送额度。三个都有最好，第 2 章会全部用到。
+- **操作系统**——macOS 或 Linux。Windows 用户请使用 [WSL 2](https://learn.microsoft.com/zh-cn/windows/wsl/)，书中的 grep、bash 等工具直接调用系统命令，原生 Windows 不兼容。
 - **一个终端和编辑器**——VS Code 或任何你顺手的都行。
 
-**不适合的读者**：
-
-- 想学 LangChain / LlamaIndex 这类框架的——这本书不用任何 Agent 框架，全部手写。
-- 想了解大模型原理和训练的——这本书只管调用，不管模型内部。
-- 已经读过 Claude Code 源码并且理解其架构的——你可能会觉得内容太基础。
-
----
+读者画像、Ling 完整技术规格、相关书列表，在 [封面页](https://fivwvysqdz.feishu.cn/wiki/HtXZwJfm6ifNdnkmkx9c2vKenEf) 上。
 
 ## 全书路线图
 
-11 章，从一个 50 行的玩具到一个能跑在生产环境的 Agent。每一章都在前一章的代码上递增，不跳步。
+11 章正文 + 终章 + 1 章 Claude Code 源码深读 + 4 篇附录。每一章在前一章的代码上递增，不跳步。
 
 ```mermaid
 graph LR
@@ -322,21 +321,30 @@ graph LR
   C8 --> C9["第9章<br/>MCP<br/>工具插件协议"]
   C9 --> C10["第10章<br/>多Agent协作<br/>并行调度"]
   C10 --> C11["第11章<br/>CLI→生产<br/>CI集成"]
+  C11 --> CF["终章<br/>从Ling到真实世界"]
+  CF --> C12["第12章<br/>深入Claude Code<br/>源码对照"]
 ```
 
-**第 1-3 章**是地基。你会拿到一个能对话、能用工具、能切模型的 Agent。这三章完成后，Ling 就已经能干不少活了。
+- **第 1-3 章**：拿到一个能对话、能用工具、能切模型的 Agent。这三章读完 Ling 已经能干不少活。
+- **第 4-6 章**：上下文工程把项目信息塞进 system prompt 而不让 token 爆；权限系统是跑 shell 时的安全网；流式交互让响应跟得上你看屏幕的速度。
+- **第 7-9 章**：会话持久化、Hook 生命周期扩展、MCP 工具插件——这一段把 Ling 从"能跑"推到"能长期用"。
+- **第 10-11 章**：多 Agent 并行协作；从交互式 CLI 改造成能嵌入管道、跑在 CI 里的工具。
+- **终章 + 第 12 章**：自己造过一遍 Agent 之后，回头读 Claude Code 的源码完全是另一种感受。第 12 章带你逐模块对照看。
 
-**第 4-6 章**是打磨。上下文工程让 Agent 更聪明，权限系统让它更安全，流式交互让它用起来不像在等一个 HTTP 请求。
+每一章结尾有一个"对照 Claude Code"环节。Claude Code 是这个方向上做得最完整的产品，它的开源部分是最好的参照物。你写的每一个模块都能在 Claude Code 里找到对应的工业级实现。看看它怎么做、想想为什么那样做，比单纯跟着教程抄代码有用。
 
-**第 7-9 章**是进阶。会话持久化、Hook 生命周期扩展、MCP 工具插件——这些是把 Ling 从"能用"推向"好用"的关键。
+## 怎么读这本书
 
-**第 10-11 章**是收官。多 Agent 并行协作，再把 Ling 从一个交互式 CLI 变成一个可以嵌入管道、跑在 CI 里的生产力工具。
+按你的目标走不同路线：
 
-每一章结尾都有一个"对照 Claude Code"环节。Claude Code 是目前最成熟的 AI 编程助手之一，它的开源版本是我们最好的参照物。你写的每个模块，都能在 Claude Code 里找到对应的工业级实现。看看它怎么做的，想想为什么那样做，比单纯跟着教程抄代码有用。
+- **想快速上手**：第 1、3、5 章必读（Agent Loop、工具系统、权限），剩下章节按需查。这是"我只想拿一个能用的"的最短路径。
+- **系统学习**：从第 1 章开始顺序读到第 11 章，每章动手把代码敲一遍。预计 25-40 小时，分两周做完比较合适。
+- **冲着源码理解去**：先快速扫一遍 1-11 章把 Ling 跑通，重点啃第 12 章，对照 Claude Code 源码逐模块看。你已经自己造过一遍，看它的源码会比直接读快很多。
+- **只想抄思路**：跳着翻你最感兴趣的章节。每一章基本独立，能拿单章去对应自己手上的项目。
 
 ---
 
-行，废话到此为止。翻到第 1 章，打开编辑器，新建一个 `ling.ts`——50 行代码，你的第一个 Agent。
+行，话说到这。翻到第 1 章，打开编辑器，新建一个 `ling.ts`——50 行代码，你的第一个 Agent。
 
 ---
 
