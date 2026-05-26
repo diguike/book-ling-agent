@@ -1,3 +1,9 @@
+---
+title: 第 10 章 · 多 Agent 协作——一个不够就来一群
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/NETSwW4zqi7umOkBNiLc3JHCnXD"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 第 10 章 · 多 Agent 协作——一个不够就来一群
 
 你不会一个人又写代码又做 Code Review。
@@ -6,7 +12,7 @@
 
 Agent 也一样。
 
-来个具体场景：把一个 Express 项目迁移到 Hono。这个项目有 8 个路由文件、3 个中间件、2 个配置文件。一个 Agent 干这事会怎样？
+来个具体场景：把一个 [Express](https://expressjs.com) 项目迁移到 [Hono](https://hono.dev)。这个项目有 8 个路由文件、3 个中间件、2 个配置文件。一个 Agent 干这事会怎样？
 
 它得先看所有路由文件，分析 Express API 的用法。然后看中间件怎么写的。然后看配置。然后开始改。改到第五个文件的时候，上下文窗口已经塞了几千行代码，前面分析的结论可能已经被挤出去了。它忘了第一个路由文件用了 `req.query` 的哪种写法，于是又得重新读一遍。
 
@@ -657,7 +663,7 @@ console.log(summarizeResults([plan, ...codeResults, review]))
 
 上面的子 Agent 共享同一个工作目录——它们同时改文件。大多数情况下没问题，因为任务分配时已经按文件分组了。但如果两个子 Agent 不小心改了同一个文件呢？
 
-Git worktree 可以解决这个问题：
+[Git worktree](https://git-scm.com/docs/git-worktree) 可以解决这个问题：
 
 ```bash
 # 为每个子 Agent 创建独立的工作目录

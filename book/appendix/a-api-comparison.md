@@ -1,6 +1,16 @@
+---
+title: 附录 A · 三家 LLM API 对比速查
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/DzWrwc2Lri9VC7kR8ZdcWFwCnLm"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
+> **配套资源**  
+> 源码仓库 · [github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)  
+> 在线阅读 · [inferloop.dev/ling-agent](https://inferloop.dev/ling-agent)
+
 # 附录 A · 三家 LLM API 对比速查表
 
-这份速查表覆盖火山引擎（豆包）、Claude、OpenAI 三家的 API 差异。写 Provider 适配层时直接翻这里。
+这份速查表覆盖[火山引擎（豆包）](https://www.volcengine.com/product/doubao)、[Claude](https://docs.anthropic.com/en/api/messages)、[OpenAI](https://platform.openai.com/docs/api-reference/chat) 三家的 API 差异。写 Provider 适配层时直接翻这里。
 
 ---
 

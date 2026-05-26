@@ -1,3 +1,9 @@
+---
+title: 第 11 章 · 从 CLI 到生产——非交互模式与 CI/CD
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/Y56FwRC6tiVwepkGzVJc0ndDnxe"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 第 11 章 · 从 CLI 到生产——非交互模式与 CI/CD
 
 Agent 不只是给人用的，也是给机器用的。
@@ -331,7 +337,7 @@ $ ling -p "分析这个文件" --format stream
 {"type":"end","content":"这个文件是项目的入口...","model":"gpt-4o","turns":2}
 ```
 
-stream 格式的关键是 **NDJSON**（Newline Delimited JSON）——每行一个独立的 JSON 对象。调用方可以逐行解析，不需要等全部完成。这对长时间运行的任务特别有用。
+stream 格式的关键是 **[NDJSON](https://ndjson.org)**（Newline Delimited JSON）——每行一个独立的 JSON 对象。调用方可以逐行解析，不需要等全部完成。这对长时间运行的任务特别有用。
 
 ---
 
@@ -485,7 +491,7 @@ export function validateAgainstSchema(
 
 我们的 `validateAgainstSchema` 只是教学用的简易实现。真要上生产，建议用成熟的校验库：
 
-- **Ajv**（Another JSON Validator）：JSON Schema 标准实现，支持 draft-07 到 2020-12，生态最完善
+- **[Ajv](https://ajv.js.org)**（Another JSON Validator）：JSON Schema 标准实现，支持 draft-07 到 2020-12，生态最完善
 - **Zod**：TypeScript-first 的 schema 库，类型推导极好，适合纯 TS 项目
 
 此外，主流 LLM 都提供了原生的结构化输出约束，不完全依赖 prompt 指令：
@@ -590,7 +596,7 @@ main().catch((err) => {
 
 ---
 
-## 11.5 GitHub Actions 集成
+## 11.5 [GitHub Actions](https://docs.github.com/zh/actions) 集成
 
 Agent 能被脚本调用了，接进 CI/CD 就是水到渠成的事。
 

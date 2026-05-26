@@ -1,6 +1,16 @@
+---
+title: 附录 B · Ling 完整代码索引
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/KcdDwL7BuiUVawkw88McHhl8nwe"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
+> **配套资源**  
+> 源码仓库 · [github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)  
+> 在线阅读 · [inferloop.dev/ling-agent](https://inferloop.dev/ling-agent)
+
 # 附录 B · Ling 完整代码索引
 
-所有代码在 `code/` 目录下，按章节组织。每章是一个独立可运行的项目，包含该章新增的模块以及之前章节的依赖代码。
+所有代码在 [`code/`](https://github.com/diguike/book-ling-agent/tree/main/code) 目录下，按章节组织。每章是一个独立可运行的项目，包含该章新增的模块以及之前章节的依赖代码。
 
 ---
 

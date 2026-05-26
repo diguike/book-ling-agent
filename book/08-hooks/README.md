@@ -1,3 +1,9 @@
+---
+title: 第 8 章 · Hook 系统：Agent 生命周期的扩展点
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/HugswbSOoiU7wjk3LsHcyTU8n5g"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 第 8 章 · Hook 系统：Agent 生命周期的扩展点
 
 你不可能预见所有需求。

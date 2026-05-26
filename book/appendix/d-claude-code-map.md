@@ -1,8 +1,18 @@
+---
+title: 附录 D · Claude Code 源码导航
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/UlFvw51zViu9UskUDpwcjoBjnqd"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
+> **配套资源**  
+> 源码仓库 · [github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)  
+> 在线阅读 · [inferloop.dev/ling-agent](https://inferloop.dev/ling-agent)
+
 # 附录 D · Claude Code 源码导航
 
-Claude Code 是本书的主要参考对象。这份导航帮你在它的源码中快速定位核心模块。
+[Claude Code](https://www.anthropic.com/claude-code) 是本书的主要参考对象。这份导航帮你在它的源码中快速定位核心模块。
 
-说明：Claude Code 的源码通过 npm 包 `@anthropic-ai/claude-code` 分发，安装后可在 `node_modules/@anthropic-ai/claude-code` 中查看。源码经过编译但结构清晰，模块边界明确。
+说明：Claude Code 的源码通过 npm 包 [`@anthropic-ai/claude-code`](https://www.npmjs.com/package/@anthropic-ai/claude-code) 分发，安装后可在 `node_modules/@anthropic-ai/claude-code` 中查看。源码经过编译但结构清晰，模块边界明确。
 
 ---
 

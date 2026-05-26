@@ -1,10 +1,16 @@
+---
+title: 第 9 章 · MCP：一个协议连接所有工具
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/GbaIwsFfYijSfvk56xkcHrp7ntf"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 第 9 章 · MCP：一个协议连接所有工具
 
 上一章我们搞定了 Hook 系统——在 Agent 已有动作上加逻辑。但如果你想给 Agent **全新的能力**呢？比如查数据库、搜 Jira、调公司内部 API——这些不是 Hook 能搞定的，你需要给 Agent 加新工具。
 
 最粗暴的做法：直接在代码里加一个工具函数。但这意味着每加一个工具都要改 Agent 代码、重新部署。用户想接自己的服务？不好意思，先提 PR。
 
-MCP（Model Context Protocol）的思路是：**定义一个标准协议，让工具以独立进程运行，Agent 通过协议和它通信**。就像 USB——你不需要知道 U 盘的内部实现，插上就能用。
+[MCP（Model Context Protocol）](https://modelcontextprotocol.io)的思路是：**定义一个标准协议，让工具以独立进程运行，Agent 通过协议和它通信**。就像 USB——你不需要知道 U 盘的内部实现，插上就能用。
 
 ```mermaid
 flowchart LR
@@ -23,7 +29,7 @@ MCP 的架构很简单：
 Agent (MCP Client) ←→ stdio/HTTP ←→ MCP Server (工具提供者)
 ```
 
-Agent 是 Client，工具提供者是 Server。它们之间用 JSON-RPC 2.0 通信。最常见的传输方式是 stdio——Agent 把 MCP Server 当子进程启动，通过 stdin/stdout 交换 JSON 消息。
+Agent 是 Client，工具提供者是 Server。它们之间用 [JSON-RPC 2.0](https://www.jsonrpc.org/specification) 通信。最常见的传输方式是 stdio——Agent 把 MCP Server 当子进程启动，通过 stdin/stdout 交换 JSON 消息。
 
 ---
 

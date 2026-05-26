@@ -1,3 +1,9 @@
+---
+title: 第 12 章 · 深入 Claude Code 源码
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/YLzfwn16Uiq4O6kie6NcZG5Tnvd"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 第 12 章 · 深入 Claude Code 源码
 
 你已经造了一个 Agent。2000 行 TypeScript，8 个工具，权限系统，Hook，MCP，多 Agent 调度——Ling 是你从零搭起来的。

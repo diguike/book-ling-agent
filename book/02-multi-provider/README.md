@@ -1,3 +1,9 @@
+---
+title: 第 2 章 · 多模型适配——一套代码跑通三家 LLM
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/ZIYjw3Fwri5LNuk7q32cLn1unDf"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 第2章 多模型适配——一套代码跑通三家 LLM
 
 上一章我们用火山引擎的豆包 API 写了一个能跑的 Agent。但你很快会遇到一个现实问题：老板说"试试 Claude 效果怎么样"，或者你自己想对比一下 GPT-4o 和豆包的工具调用能力。
@@ -396,7 +402,7 @@ export class ClaudeProvider implements LLMProvider {
 
 回头看一下 ClaudeProvider 的代码量，大概是 VolcanoProvider 的 1.5 倍。多出来的部分全在"翻译"上——system 消息要提出来，assistant content 要从扁平格式转成数组格式，tool 消息的角色要从 `tool` 变成 `user`。这种翻译逻辑写一次就好，以后每次模型迭代只要 API 格式不变，这些代码就不用动。
 
-流式处理（`stream` 方法）的适配同理。Claude 用的是 Server-Sent Events，通过 `content_block_start`、`content_block_delta`、`content_block_stop` 三种事件来推送内容。我们把它翻译成统一的 `StreamChunk` 格式，上层代码不用关心底层是 SSE 还是其他协议。完整实现见源码文件。
+流式处理（`stream` 方法）的适配同理。Claude 用的是 [Server-Sent Events (SSE)](https://developer.mozilla.org/zh-CN/docs/Web/API/Server-sent_events)，通过 `content_block_start`、`content_block_delta`、`content_block_stop` 三种事件来推送内容。我们把它翻译成统一的 `StreamChunk` 格式，上层代码不用关心底层是 SSE 还是其他协议。完整实现见源码文件。
 
 ## 2.5 实现 OpenAIProvider
 
@@ -609,7 +615,7 @@ OpenAI 返回的 `function.arguments` 是 JSON 字符串（`"{\"file_path\": \"x
 
 我们自己写的 Ling 用的是最朴素的 Adapter 模式。来看看 Claude Code 是怎么做多后端支持的。
 
-Claude Code 支持三个后端：直接调 Anthropic API、通过 AWS Bedrock、通过 Google Vertex。它的切换方式是**环境变量**：
+Claude Code 支持三个后端：直接调 Anthropic API、通过 [AWS Bedrock](https://aws.amazon.com/bedrock/)、通过 [Google Vertex AI](https://cloud.google.com/vertex-ai)。它的切换方式是**环境变量**：
 
 ```bash
 # 用 Bedrock

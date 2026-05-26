@@ -1,3 +1,9 @@
+---
+title: 第 4 章 · 上下文工程——比 Prompt Engineering 更重要的事
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/D079wzybGiVdxnkbQ6kcwB12nIb"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 上下文工程——比 Prompt Engineering 更重要的事
 
 同一个问题，上下文不同，Agent 的表现天壤之别。
@@ -338,7 +344,7 @@ export function estimateTokens(text: string): number {
 }
 ```
 
-1 token 约等于 4 个英文字符。中文大概 1.5 字符一个 token，但用 `字符数 / 4` 做保守估计够用了。精确计算要用 tokenizer（比如 `tiktoken`），但那东西很慢，在每次请求前跑一遍不值得。
+1 token 约等于 4 个英文字符。中文大概 1.5 字符一个 token，但用 `字符数 / 4` 做保守估计够用了。精确计算要用 tokenizer（比如 [`tiktoken`](https://github.com/openai/tiktoken)），但那东西很慢，在每次请求前跑一遍不值得。
 
 预算分配：
 

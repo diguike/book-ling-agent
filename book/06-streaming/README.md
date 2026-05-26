@@ -1,3 +1,9 @@
+---
+title: 第 6 章 · 流式交互——边想边说的用户体验
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/VoetwQL39iUBsLks8akcTG0WnGd"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 流式交互——边想边说的用户体验
 
 上一章我们给 Ling 装上了权限系统，现在它不会乱删文件了。但用起来有个很大的问题：你发了一条消息，然后盯着空白屏幕等 10 秒、20 秒、甚至 30 秒，突然"啪"一大段文字出现。
@@ -348,7 +354,7 @@ async *stream(
 
 ### ANSI escape codes
 
-终端里的颜色、加粗、光标控制，都靠 ANSI escape codes。很多人用 `chalk` 库来做，但为了一个颜色引入一个依赖没必要。自己写几个常量就够了：
+终端里的颜色、加粗、光标控制，都靠 [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code)。很多人用 [`chalk`](https://github.com/chalk/chalk) 库来做，但为了一个颜色引入一个依赖没必要。自己写几个常量就够了：
 
 ```typescript
 const RESET   = "\x1b[0m";

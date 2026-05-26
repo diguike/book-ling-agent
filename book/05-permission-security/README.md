@@ -1,3 +1,9 @@
+---
+title: 第 5 章 · 权限与安全——Agent 开发的第一优先级
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/A2MRw8azBiXETlkMJhwcxD9lnog"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 权限与安全——Agent 开发的第一优先级
 
 ## 一个真实的恐怖场景
@@ -114,7 +120,7 @@ function matchPattern(rule: PermissionRule, primaryArg: string): boolean {
 }
 ```
 
-两个匹配函数都很简单。`matchTool` 检查工具名，`*` 匹配所有工具。`matchPattern` 用 `minimatch` 做 glob 匹配，`dot: true` 让 `*` 能匹配以 `.` 开头的文件（比如 `.env`）。
+两个匹配函数都很简单。`matchTool` 检查工具名，`*` 匹配所有工具。`matchPattern` 用 [`minimatch`](https://github.com/isaacs/minimatch) 做 glob 匹配，`dot: true` 让 `*` 能匹配以 `.` 开头的文件（比如 `.env`）。
 
 接下来要解决一个问题：不同工具的"参数"长得不一样，bash 的参数是 `command`，read_file 的参数是 `file_path`，怎么统一？
 
@@ -667,7 +673,7 @@ Claude Code 有一批始终需要确认的目录：
 
 ## 5.11 进程级隔离
 
-我们的权限系统是"名单过滤"层面的防护——用 glob 规则拦截已知的危险模式。但规则再多，也只能拦住你提前想到的情况。生产环境需要进程级沙箱作为第二道防线：Docker 容器限制文件系统和网络访问、Linux seccomp 限制系统调用、macOS sandbox-exec 限制进程能力。
+我们的权限系统是"名单过滤"层面的防护——用 glob 规则拦截已知的危险模式。但规则再多，也只能拦住你提前想到的情况。生产环境需要进程级沙箱作为第二道防线：[Docker](https://www.docker.com) 容器限制文件系统和网络访问、Linux [seccomp](https://man7.org/linux/man-pages/man2/seccomp.2.html) 限制系统调用、macOS [sandbox-exec](https://keith.github.io/xcode-man-pages/sandbox-exec.1.html) 限制进程能力。
 
 Claude Code 在 macOS 上就用了 `sandbox-exec` 来限制文件系统和网络访问——即使权限规则被绕过，沙箱也能兜底。
 

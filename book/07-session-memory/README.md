@@ -1,3 +1,9 @@
+---
+title: 第 7 章 · 会话与记忆——记住上次聊到哪了
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/FJRXwlWmFiNyK2k3Tn6cDvaWnlb"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
 # 会话与记忆——记住上次聊到哪了
 
 昨天让 Agent 花了半小时分析项目架构、理清了模块依赖、还帮你重构了三个文件。今天打开——全忘了。你得从头再说一遍"这是个 Express 项目，用了 Prisma，目录结构是这样的……"
@@ -89,7 +95,7 @@ export interface SessionSummary {
 
 为什么选文件不选 SQLite？三个理由：
 
-1. **简单**。不需要额外依赖，Node.js 自带 `fs` 模块就行。SQLite 要装 `better-sqlite3`，这个包的 native binding 在不同平台上经常出编译问题。
+1. **简单**。不需要额外依赖，Node.js 自带 `fs` 模块就行。[SQLite](https://www.sqlite.org) 要装 [`better-sqlite3`](https://github.com/WiseLibs/better-sqlite3)，这个包的 native binding 在不同平台上经常出编译问题。
 2. **可读**。用户可以直接用编辑器打开 JSON 文件查看甚至手动编辑。调试时能直接 `cat` 看内容。SQLite 是二进制格式，得用专门工具。
 3. **够用**。一个 Agent 能有多少会话？几百个顶天了。几百个 JSON 文件的读写性能完全不是问题。等真的遇到性能瓶颈再迁移不迟。
 

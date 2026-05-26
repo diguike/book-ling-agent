@@ -1,8 +1,18 @@
+---
+title: 附录 C · MCP 协议速查
+feishu_url: "https://fivwvysqdz.feishu.cn/wiki/YvU9wTnf7iATkqk1OEycrnRJnhd"
+last_synced: "2026-05-24T14:21:17Z"
+---
+
+> **配套资源**  
+> 源码仓库 · [github.com/diguike/book-ling-agent](https://github.com/diguike/book-ling-agent)  
+> 在线阅读 · [inferloop.dev/ling-agent](https://inferloop.dev/ling-agent)
+
 # 附录 C · MCP 协议速查
 
-MCP（Model Context Protocol）是 Anthropic 发布的开放协议，让 LLM 应用能以标准方式连接外部工具和数据源。协议基于 JSON-RPC 2.0。
+[MCP（Model Context Protocol）](https://modelcontextprotocol.io)是 Anthropic 发布的开放协议，让 LLM 应用能以标准方式连接外部工具和数据源。协议基于 [JSON-RPC 2.0](https://www.jsonrpc.org/specification)。
 
-官方规范：https://spec.modelcontextprotocol.io
+官方规范：[spec.modelcontextprotocol.io](https://spec.modelcontextprotocol.io)
 
 ---
 
