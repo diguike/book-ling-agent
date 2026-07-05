@@ -1,7 +1,7 @@
 ---
 title: 第 4 章 · 上下文工程——比 Prompt Engineering 更重要的事
 feishu_url: "https://fivwvysqdz.feishu.cn/wiki/D079wzybGiVdxnkbQ6kcwB12nIb"
-last_synced: "2026-05-24T14:21:17Z"
+last_synced: "2026-07-05T13:14:02"
 ---
 
 # 上下文工程——比 Prompt Engineering 更重要的事
