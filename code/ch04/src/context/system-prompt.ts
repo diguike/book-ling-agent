@@ -88,10 +88,15 @@ export function buildSystemPrompt(options: SystemPromptOptions): string {
 }
 
 // Token 预算管理
+// CJK 字符（汉字、日文假名、全角标点等）匹配范围
+const CJK_RE = /[\u3000-\u9fff\uf900-\ufaff\uff00-\uffef]/g;
+
 export function estimateTokens(text: string): number {
-  // 粗略估算：1 token ≈ 4 个字符（英文），中文约 1.5 字符/token
-  // 这里用保守估计
-  return Math.ceil(text.length / 4);
+  // 粗略估算：英文/代码约 4 字符/token；CJK 约 1.5 字符/token
+  // 中文若直接按 /4 估算会严重低估，导致预算系统性偏大
+  const cjkChars = (text.match(CJK_RE) ?? []).length;
+  const otherChars = text.length - cjkChars;
+  return Math.ceil(cjkChars / 1.5 + otherChars / 4);
 }
 
 export interface TokenBudget {

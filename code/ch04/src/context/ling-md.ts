@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from "fs";
 import { join, dirname, resolve } from "path";
 
 const LING_MD = ".ling.md";
-const MAX_SIZE = 25 * 1024; // 25KB 上限，和 Claude Code 的 CLAUDE.md 一致
+const MAX_SIZE = 25 * 1024; // 25KB 上限，借鉴 Claude Code Auto Memory 的截断规则
 const MAX_LINES = 200;
 
 export interface LingMdResult {

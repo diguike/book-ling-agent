@@ -18,6 +18,9 @@ const systemPrompt = `You are Ling, a coding assistant.
 When the user tells you something worth remembering (preferences, project conventions, corrections),
 call the save_memory tool to persist it across sessions.`;
 
+// 实际发给 API 的 system 内容：基础 prompt + 跨会话记忆（启动时拼接）
+let activeSystemPrompt = systemPrompt;
+
 // ---- CLI 参数解析 ----
 
 interface CliArgs {
@@ -124,7 +127,7 @@ async function agentLoop(userMessage: string, history: Message[]): Promise<strin
   while (true) {
     const response = await client.chat.completions.create({
       model,
-      messages: [{ role: "system", content: systemPrompt }, ...history],
+      messages: [{ role: "system", content: activeSystemPrompt }, ...history],
       tools: [memoryTool],
     });
 
@@ -203,10 +206,10 @@ async function main() {
     console.log(`New session: ${session.id.slice(0, 8)}`);
   }
 
-  // 加载跨会话记忆到上下文
+  // 加载跨会话记忆，拼进 system prompt——LLM 每轮都能看到
   const memoryContext = await memoryStore.loadForContext();
   if (memoryContext) {
-    // 注入为系统消息的一部分，这样 LLM 每轮都能看到
+    activeSystemPrompt = `${systemPrompt}\n\n## Memory\n${memoryContext}`;
     console.log(`Loaded ${memoryContext.split("\n").length} lines of memory context.`);
   }
 

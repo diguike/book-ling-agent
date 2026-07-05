@@ -14,8 +14,14 @@ const DEFAULT_OPTIONS: CompactOptions = {
   maxHistoryTokens: 50000,
 };
 
+// CJK 字符（汉字、日文假名、全角标点等）匹配范围
+const CJK_RE = /[\u3000-\u9fff\uf900-\ufaff\uff00-\uffef]/g;
+
 function estimateTokens(text: string): number {
-  return Math.ceil(text.length / 4);
+  // 英文/代码约 4 字符/token；CJK 约 1.5 字符/token，直接按 /4 会严重低估
+  const cjkChars = (text.match(CJK_RE) ?? []).length;
+  const otherChars = text.length - cjkChars;
+  return Math.ceil(cjkChars / 1.5 + otherChars / 4);
 }
 
 function messagesToTokens(messages: Message[]): number {
